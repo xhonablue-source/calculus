@@ -1,4 +1,69 @@
-import streamlit as st
+# Create the function
+    if b2 != 0:  # Avoid division by zero in denominator leading coefficient
+        # Generate function expression
+        x = sp.Symbol('x')
+        numerator = a2*x**2 + a1*x + a0
+        denominator = b2*x**2 + b1*x + b0
+        func = numerator / denominator
+        
+        # Display the function
+        st.markdown(f"""
+        <div class='formula-box'>
+        <h4>Current Function:</h4>
+        <p style='font-size: 1.2em; text-align: center;'>
+        f(x) = ({a2}x² + {a1}x + {a0}) / ({b2}x² + {b1}x + {b0})
+        </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Calculate limit
+        limit_val = a2 / b2 if b2 != 0 else float('inf')
+        
+        # Show step-by-step solution
+        if show_steps:
+            st.markdown("""
+            <div class='concept-card'>
+            <h4>📝 Step-by-Step Solution</h4>
+            """, unsafe_allow_html=True)
+            
+            st.markdown(f"""
+            **Step 1:** Identify the highest power of x in both numerator and denominator.
+            - Highest power: x²
+            
+            **Step 2:** Divide both numerator and denominator by x²:
+            $\\frac{{{a2} + \\frac{{{a1}}}{{x}} + \\frac{{{a0}}}{{x^2}}}}{{{b2} + \\frac{{{b1}}}{{x}} + \\frac{{{b0}}}{{x^2}}}}$
+            
+            **Step 3:** Take the limit as x → ∞:
+            - Terms with x in denominator approach 0
+            - Result: {a2}/{b2} = {limit_val:.3f}
+            
+            **Conclusion:** The horizontal asymptote is y = {limit_val:.3f}
+            """)
+            st.markdown("</div>", unsafe_allow_html=True)
+        
+        # Real-world applications section
+        st.markdown("""
+        <div class='interactive-section'>
+        <h4>🌍 Real-World Applications of Limits & Asymptotes</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        limit_col1, limit_col2 = st.columns(2)
+        
+        with limit_col1:
+            st.markdown("""
+            <div style='background: #e3f2fd; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #2196f3;'>
+            <h5>📱 Technology & Engineering</h5>
+            <p><strong>Internet Speed:</strong> Your internet connection has a maximum bandwidth (horizontal asymptote). No matter how many devices you add, your total speed approaches but never exceeds this limit.</p>
+            <p><strong>CPU Performance:</strong> Computer processors have thermal limits - performance approaches maximum capacity as temperature increases.</p>
+            </div>
+            
+            <div style='background: #f3e5f5; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #9c27b0; margin-top: 1rem;'>
+            <h5>🧬 Biology & Medicine</h5>
+            <p><strong>Drug Saturation:</strong> When taking medication, your blood concentration approaches a maximum level (asymptote) - taking more doesn't increase effectiveness.</p>
+            <p><strong>Population Growth:</strong> Animal populations approach carrying capacity of their environment - they can't grow indefinitely.</p>
+            </div>
+            """, unsafe_import streamlit as st
 import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
