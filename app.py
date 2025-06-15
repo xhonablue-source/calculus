@@ -62,7 +62,7 @@ st.markdown("""
 st.sidebar.title("📚 Navigation")
 section = st.sidebar.selectbox(
     "Choose a section:",
-    ["🏠 Overview", "🎯 Interactive Limits", "📊 Asymptote Explorer", "🔧 Function Builder", "🧮 FTC Visualizer", "🎮 Quiz Mode"]
+    ["🏠 Overview", "🎯 Interactive Limits", "📊 Asymptote Explorer", "🔧 Function Builder", "🧮 FTC Visualizer", "📐 MVT Explorer", "🎮 Quiz Mode"]
 )
 
 # --- MAIN CONTENT BASED ON SELECTION ---
@@ -604,6 +604,218 @@ elif section == "🧮 FTC Visualizer":
         
         st.plotly_chart(fig, use_container_width=True)
 
+elif section == "📐 MVT Explorer":
+    st.header("📐 Mean Value Theorem Explorer")
+    
+    st.markdown("""
+    <div class='interactive-section'>
+    <h4>🎯 Understanding the Mean Value Theorem</h4>
+    <p>Explore how the instantaneous rate of change equals the average rate of change!</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # MVT Statement
+    st.markdown("""
+    <div class='formula-box'>
+    <h4>📜 Mean Value Theorem Statement</h4>
+    <p>If f(x) is <strong>continuous</strong> on [a,b] and <strong>differentiable</strong> on (a,b), then there exists at least one point c in (a,b) such that:</p>
+    <p style='text-align: center; font-size: 1.3em;'><strong>f'(c) = [f(b) - f(a)] / (b - a)</strong></p>
+    <p>In other words: <em>instantaneous rate of change = average rate of change</em></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Interactive MVT demonstration
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("🎛️ Function Controls")
+        mvt_function = st.selectbox("Choose function:", [
+            "x²", "x³ - 3x", "sin(x)", "x³ - 2x² + x + 1", "ln(x+2)"
+        ])
+        
+        if mvt_function in ["x²", "x³ - 3x", "x³ - 2x² + x + 1"]:
+            a_mvt = st.slider("Left endpoint (a)", -3.0, 3.0, -1.0, 0.1, key="mvt_a")
+            b_mvt = st.slider("Right endpoint (b)", -3.0, 3.0, 2.0, 0.1, key="mvt_b")
+        elif mvt_function == "sin(x)":
+            a_mvt = st.slider("Left endpoint (a)", -2*np.pi, 2*np.pi, 0.0, 0.1, key="mvt_a_sin")
+            b_mvt = st.slider("Right endpoint (b)", -2*np.pi, 2*np.pi, np.pi, 0.1, key="mvt_b_sin")
+        else:  # ln(x+2)
+            a_mvt = st.slider("Left endpoint (a)", -1.5, 5.0, 0.0, 0.1, key="mvt_a_ln")
+            b_mvt = st.slider("Right endpoint (b)", -1.5, 5.0, 3.0, 0.1, key="mvt_b_ln")
+        
+        if a_mvt >= b_mvt:
+            st.error("⚠️ Please ensure a < b")
+        else:
+            show_tangent = st.checkbox("Show tangent line at c", True)
+            show_secant = st.checkbox("Show secant line", True)
+            show_calculation = st.checkbox("Show calculations", True)
+    
+    with col2:
+        if a_mvt < b_mvt:
+            # Define function and its derivative
+            x_sym = sp.Symbol('x')
+            if mvt_function == "x²":
+                f_expr = x_sym**2
+                f_prime_expr = 2*x_sym
+                func_title = "f(x) = x²"
+            elif mvt_function == "x³ - 3x":
+                f_expr = x_sym**3 - 3*x_sym
+                f_prime_expr = 3*x_sym**2 - 3
+                func_title = "f(x) = x³ - 3x"
+            elif mvt_function == "sin(x)":
+                f_expr = sp.sin(x_sym)
+                f_prime_expr = sp.cos(x_sym)
+                func_title = "f(x) = sin(x)"
+            elif mvt_function == "x³ - 2x² + x + 1":
+                f_expr = x_sym**3 - 2*x_sym**2 + x_sym + 1
+                f_prime_expr = 3*x_sym**2 - 4*x_sym + 1
+                func_title = "f(x) = x³ - 2x² + x + 1"
+            else:  # ln(x+2)
+                f_expr = sp.log(x_sym + 2)
+                f_prime_expr = 1/(x_sym + 2)
+                func_title = "f(x) = ln(x+2)"
+            
+            # Calculate values
+            f_a = float(f_expr.subs(x_sym, a_mvt))
+            f_b = float(f_expr.subs(x_sym, b_mvt))
+            avg_rate = (f_b - f_a) / (b_mvt - a_mvt)
+            
+            # Find c value(s) where f'(c) = average rate
+            equation = sp.Eq(f_prime_expr, avg_rate)
+            try:
+                c_values = sp.solve(equation, x_sym)
+                # Filter for real values in the interval (a,b)
+                valid_c_values = []
+                for c_val in c_values:
+                    if c_val.is_real:
+                        c_float = float(c_val)
+                        if a_mvt < c_float < b_mvt:
+                            valid_c_values.append(c_float)
+                
+                if valid_c_values:
+                    c_mvt = valid_c_values[0]  # Use first valid value
+                else:
+                    c_mvt = (a_mvt + b_mvt) / 2  # Fallback
+            except:
+                c_mvt = (a_mvt + b_mvt) / 2  # Fallback
+            
+            f_c = float(f_expr.subs(x_sym, c_mvt))
+            
+            if show_calculation:
+                st.markdown(f"""
+                <div class='concept-card'>
+                <h4>📊 Calculations</h4>
+                <p><strong>f(a) = f({a_mvt:.2f}) = {f_a:.3f}</strong></p>
+                <p><strong>f(b) = f({b_mvt:.2f}) = {f_b:.3f}</strong></p>
+                <p><strong>Average rate = (f(b)-f(a))/(b-a) = {avg_rate:.3f}</strong></p>
+                <p><strong>MVT point: c = {c_mvt:.3f}</strong></p>
+                <p><strong>f'(c) = {float(f_prime_expr.subs(x_sym, c_mvt)):.3f}</strong></p>
+                <p style='color: green;'><strong>✓ f'(c) = average rate!</strong></p>
+                </div>
+                """, unsafe_allow_html=True)
+    
+    # Create the visualization
+    if a_mvt < b_mvt:
+        # Generate function values
+        x_vals = np.linspace(min(a_mvt-1, -5), max(b_mvt+1, 5), 1000)
+        
+        # Calculate y values based on function
+        if mvt_function == "x²":
+            y_vals = x_vals**2
+        elif mvt_function == "x³ - 3x":
+            y_vals = x_vals**3 - 3*x_vals
+        elif mvt_function == "sin(x)":
+            y_vals = np.sin(x_vals)
+        elif mvt_function == "x³ - 2x² + x + 1":
+            y_vals = x_vals**3 - 2*x_vals**2 + x_vals + 1
+        else:  # ln(x+2)
+            y_vals = np.log(x_vals + 2)
+            # Only plot where x+2 > 0
+            mask = x_vals > -2
+            x_vals = x_vals[mask]
+            y_vals = y_vals[mask]
+        
+        fig = go.Figure()
+        
+        # Main function
+        fig.add_trace(go.Scatter(
+            x=x_vals, y=y_vals,
+            mode='lines',
+            name=func_title,
+            line=dict(color='blue', width=3)
+        ))
+        
+        # Points at a and b
+        fig.add_trace(go.Scatter(
+            x=[a_mvt, b_mvt],
+            y=[f_a, f_b],
+            mode='markers',
+            name='Endpoints',
+            marker=dict(color='red', size=8)
+        ))
+        
+        # Point at c
+        fig.add_trace(go.Scatter(
+            x=[c_mvt],
+            y=[f_c],
+            mode='markers',
+            name=f'MVT point c = {c_mvt:.3f}',
+            marker=dict(color='green', size=10, symbol='star')
+        ))
+        
+        # Secant line
+        if show_secant:
+            secant_x = np.linspace(a_mvt - 0.5, b_mvt + 0.5, 100)
+            secant_y = f_a + avg_rate * (secant_x - a_mvt)
+            fig.add_trace(go.Scatter(
+                x=secant_x, y=secant_y,
+                mode='lines',
+                name=f'Secant line (slope = {avg_rate:.3f})',
+                line=dict(color='red', width=2, dash='dash')
+            ))
+        
+        # Tangent line at c
+        if show_tangent:
+            tangent_slope = float(f_prime_expr.subs(x_sym, c_mvt))
+            tangent_x = np.linspace(c_mvt - 1, c_mvt + 1, 100)
+            tangent_y = f_c + tangent_slope * (tangent_x - c_mvt)
+            fig.add_trace(go.Scatter(
+                x=tangent_x, y=tangent_y,
+                mode='lines',
+                name=f'Tangent at c (slope = {tangent_slope:.3f})',
+                line=dict(color='green', width=2, dash='dot')
+            ))
+        
+        fig.update_layout(
+            title=f"Mean Value Theorem: {func_title}",
+            xaxis_title="x",
+            yaxis_title="f(x)",
+            height=500,
+            showlegend=True
+        )
+        
+        st.plotly_chart(fig, use_container_width=True)
+    
+    # Conceptual explanation
+    st.markdown("""
+    <div class='concept-card'>
+    <h4>🧠 Why Does This Matter?</h4>
+    <p>The Mean Value Theorem guarantees that somewhere between any two points on a smooth curve, 
+    the instantaneous rate of change (derivative) equals the average rate of change (slope of secant line).</p>
+    
+    <h5>🚗 Real-World Example:</h5>
+    <p>If you drive 120 miles in 2 hours (average speed = 60 mph), then at some point during your trip, 
+    your speedometer read exactly 60 mph!</p>
+    
+    <h5>🔍 Key Insights:</h5>
+    <ul>
+    <li><strong>Geometric:</strong> The tangent line at c is parallel to the secant line</li>
+    <li><strong>Physical:</strong> Instantaneous velocity equals average velocity at some moment</li>
+    <li><strong>Mathematical:</strong> Connects local behavior (derivative) to global behavior (average rate)</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
 elif section == "🎮 Quiz Mode":
     st.header("🎮 Interactive Quiz Mode")
     
@@ -651,6 +863,18 @@ elif section == "🎮 Quiz Mode":
             "options": ["8", "6", "4", "10"],
             "correct": 0,
             "explanation": "∫2x dx = x² + C. So ∫₁³ 2x dx = [x²]₁³ = 3² - 1² = 9 - 1 = 8."
+        },
+        {
+            "question": "According to the Mean Value Theorem, if f(x) = x² on [1,3], what is f'(c)?",
+            "options": ["2", "4", "6", "8"],
+            "correct": 1,
+            "explanation": "Average rate = (f(3)-f(1))/(3-1) = (9-1)/2 = 4. MVT guarantees f'(c) = 4 for some c in (1,3)."
+        },
+        {
+            "question": "For MVT to apply, a function must be:",
+            "options": ["Continuous on [a,b] only", "Differentiable on (a,b) only", "Both continuous on [a,b] and differentiable on (a,b)", "Neither"],
+            "correct": 2,
+            "explanation": "MVT requires the function to be continuous on the closed interval [a,b] AND differentiable on the open interval (a,b)."
         }
     ]
     
@@ -729,6 +953,8 @@ elif section == "🎮 Quiz Mode":
     <li><strong>Degree > Degree:</strong> No horizontal asymptote</li>
     <li><strong>FTC Part 1:</strong> d/dx[∫ₐˣ f(t) dt] = f(x)</li>
     <li><strong>FTC Part 2:</strong> ∫ₐᵇ f(x) dx = F(b) - F(a) where F'(x) = f(x)</li>
+    <li><strong>Mean Value Theorem:</strong> f'(c) = [f(b) - f(a)]/(b - a) for some c in (a,b)</li>
+    <li><strong>MVT Requirements:</strong> Continuous on [a,b] and differentiable on (a,b)</li>
     </ul>
     </div>
     """, unsafe_allow_html=True)
