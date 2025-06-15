@@ -162,7 +162,7 @@ elif section == "🎯 Interactive Limits":
             - Highest power: x²
             
             **Step 2:** Divide both numerator and denominator by x²:
-            $$\\frac{{{a2} + \\frac{{{a1}}}{{x}} + \\frac{{{a0}}}{{x^2}}}}{{{b2} + \\frac{{{b1}}}{{x}} + \\frac{{{b0}}}{{x^2}}}}$$
+            $\\frac{{{a2} + \\frac{{{a1}}}{{x}} + \\frac{{{a0}}}{{x^2}}}}{{{b2} + \\frac{{{b1}}}{{x}} + \\frac{{{b0}}}{{x^2}}}}$
             
             **Step 3:** Take the limit as x → ∞:
             - Terms with x in denominator approach 0
@@ -171,6 +171,58 @@ elif section == "🎯 Interactive Limits":
             **Conclusion:** The horizontal asymptote is y = {limit_val:.3f}
             """)
             st.markdown("</div>", unsafe_allow_html=True)
+    
+    # Real-world applications section
+    st.markdown("""
+    <div class='interactive-section'>
+    <h4>🌍 Real-World Applications of Limits & Asymptotes</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    limit_col1, limit_col2 = st.columns(2)
+    
+    with limit_col1:
+        st.markdown("""
+        <div style='background: #e3f2fd; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #2196f3;'>
+        <h5>📱 Technology & Engineering</h5>
+        <p><strong>Internet Speed:</strong> Your internet connection has a maximum bandwidth (horizontal asymptote). No matter how many devices you add, your total speed approaches but never exceeds this limit.</p>
+        <p><strong>CPU Performance:</strong> Computer processors have thermal limits - performance approaches maximum capacity as temperature increases.</p>
+        </div>
+        
+        <div style='background: #f3e5f5; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #9c27b0; margin-top: 1rem;'>
+        <h5>🧬 Biology & Medicine</h5>
+        <p><strong>Drug Saturation:</strong> When taking medication, your blood concentration approaches a maximum level (asymptote) - taking more doesn't increase effectiveness.</p>
+        <p><strong>Population Growth:</strong> Animal populations approach carrying capacity of their environment - they can't grow indefinitely.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with limit_col2:
+        st.markdown("""
+        <div style='background: #e8f5e8; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #4caf50;'>
+        <h5>💰 Economics & Business</h5>
+        <p><strong>Market Saturation:</strong> Sales of a new product approach a maximum market size - there's a limit to how many customers exist.</p>
+        <p><strong>Learning Curves:</strong> Employee productivity improves quickly at first, then approaches a maximum skill level asymptotically.</p>
+        </div>
+        
+        <div style='background: #fff3e0; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #ff9800; margin-top: 1rem;'>
+        <h5>🌡️ Physics & Chemistry</h5>
+        <p><strong>Terminal Velocity:</strong> Falling objects approach a maximum speed due to air resistance - they can't accelerate indefinitely.</p>
+        <p><strong>Chemical Reactions:</strong> Reaction rates approach zero as reactants are consumed - the reaction effectively "stops."</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%); padding: 1.5rem; border-radius: 10px; color: white; margin: 1rem 0;'>
+    <h5>🎯 Everyday Examples You've Experienced</h5>
+    <ul>
+    <li>📶 <strong>Cell Phone Signal:</strong> Bars approach maximum as you get closer to tower</li>
+    <li>🔋 <strong>Phone Charging:</strong> Battery percentage approaches 100% more slowly near the end</li>
+    <li>☕ <strong>Coffee Temperature:</strong> Hot coffee approaches room temperature asymptotically</li>
+    <li>🚗 <strong>Car Acceleration:</strong> Your car approaches its top speed but can't exceed it</li>
+    <li>💡 <strong>Learning a Skill:</strong> Improvement rate slows as you approach mastery</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
         
         # Create interactive plot
         x_vals = np.linspace(-x_range, x_range, 1000)
@@ -213,6 +265,168 @@ elif section == "🎯 Interactive Limits":
             )
             
             st.plotly_chart(fig, use_container_width=True)
+    
+    # Historical context and real-world applications
+    st.markdown("""
+    <div class='interactive-section'>
+    <h4>🏛️ Historical Context & Development</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class='concept-card'>
+    <h4>📜 The Great Mathematical Revolution</h4>
+    <p>The Fundamental Theorem of Calculus represents one of the most profound discoveries in mathematics, 
+    connecting two seemingly unrelated concepts: <strong>differentiation</strong> (rates of change) and 
+    <strong>integration</strong> (accumulation). This connection revolutionized mathematics, science, and engineering.</p>
+    
+    <h5>🧑‍🔬 Key Historical Figures:</h5>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    hist_col1, hist_col2 = st.columns(2)
+    
+    with hist_col1:
+        st.markdown("""
+        <div style='background: #e3f2fd; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #2196f3;'>
+        <h5>🇬🇧 Isaac Newton (1642-1727)</h5>
+        <p><strong>Motivation:</strong> Needed to solve physics problems - planetary motion, gravity, optics</p>
+        <p><strong>Approach:</strong> Developed "method of fluxions" - thinking of derivatives as "flowing quantities"</p>
+        <p><strong>Key Insight:</strong> Realized that finding areas (integration) was the inverse of finding slopes (differentiation)</p>
+        </div>
+        
+        <div style='background: #f3e5f5; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #9c27b0; margin-top: 1rem;'>
+        <h5>🇩🇪 Gottfried Leibniz (1646-1716)</h5>
+        <p><strong>Motivation:</strong> Philosophical interest in infinite processes and logical reasoning</p>
+        <p><strong>Approach:</strong> Created the notation we still use: dx, ∫, d/dx</p>
+        <p><strong>Key Contribution:</strong> Made calculus more systematic and teachable through better notation</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with hist_col2:
+        st.markdown("""
+        <div style='background: #e8f5e8; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #4caf50;'>
+        <h5>⚔️ The Great Calculus War</h5>
+        <p><strong>The Conflict:</strong> Newton and Leibniz developed calculus independently, leading to a bitter priority dispute</p>
+        <p><strong>Newton's Claim:</strong> Developed it earlier (1665-1666) but didn't publish</p>
+        <p><strong>Leibniz's Claim:</strong> Published first (1684) with better notation</p>
+        <p><strong>Resolution:</strong> Both credited as co-inventors, each contributed essential elements</p>
+        </div>
+        
+        <div style='background: #fff3e0; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #ff9800; margin-top: 1rem;'>
+        <h5>🎯 Why Was This Revolutionary?</h5>
+        <p><strong>Before FTC:</strong> Finding areas and slopes were completely separate, tedious problems</p>
+        <p><strong>After FTC:</strong> One unified theory solved both problems efficiently</p>
+        <p><strong>Impact:</strong> Enabled the Scientific Revolution and modern engineering</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class='formula-box'>
+    <h4>🔗 The Revolutionary Connection</h4>
+    <p>The FTC revealed that <strong>differentiation and integration are inverse operations</strong> - like addition and subtraction, or multiplication and division. This wasn't obvious before!</p>
+    
+    <p style='text-align: center; font-size: 1.2em;'>
+    <strong>Problem:</strong> Find the area under f(x) = x² from 0 to 3
+    </p>
+    
+    <p><strong>Before FTC:</strong> Use geometric methods, exhausting approximations → Hours of work</p>
+    <p><strong>After FTC:</strong> Find antiderivative F(x) = x³/3, compute F(3) - F(0) = 9 → Seconds!</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Real-world applications
+    st.markdown("""
+    <div class='interactive-section'>
+    <h4>🌍 Real-World Applications of the Fundamental Theorem</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    ftc_col1, ftc_col2 = st.columns(2)
+    
+    with ftc_col1:
+        st.markdown("""
+        <div style='background: #e3f2fd; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #2196f3;'>
+        <h5>🚀 Space Exploration</h5>
+        <p><strong>Rocket Trajectories:</strong> NASA uses FTC to calculate fuel consumption (integrate burn rate) and predict orbital paths (integrate velocity to get position).</p>
+        <p><strong>Example:</strong> Mars rover landing - integrate deceleration profile to ensure safe touchdown velocity.</p>
+        </div>
+        
+        <div style='background: #f3e5f5; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #9c27b0; margin-top: 1rem;'>
+        <h5>💰 Financial Markets</h5>
+        <p><strong>Options Pricing:</strong> Black-Scholes model uses FTC to calculate option values by integrating probability distributions over possible stock prices.</p>
+        <p><strong>Portfolio Analysis:</strong> Total return calculation by integrating dividend and price change rates over time.</p>
+        </div>
+        
+        <div style='background: #e8f5e8; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #4caf50; margin-top: 1rem;'>
+        <h5>🎵 Audio Engineering</h5>
+        <p><strong>Digital Music:</strong> Converting between sound waves (continuous) and digital files (discrete) using FTC principles.</p>
+        <p><strong>Noise Cancellation:</strong> Headphones integrate incoming sound waves to generate precise canceling waves.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with ftc_col2:
+        st.markdown("""
+        <div style='background: #fff3e0; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #ff9800;'>
+        <h5>🏥 Medical Technology</h5>
+        <p><strong>MRI/CT Scans:</strong> Image reconstruction uses FTC to build 3D body images from 2D slice data by integrating cross-sectional information.</p>
+        <p><strong>Pharmacokinetics:</strong> Drug dosing schedules calculated by integrating absorption and elimination rates.</p>
+        </div>
+        
+        <div style='background: #ffebee; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #f44336; margin-top: 1rem;'>
+        <h5>🌍 Climate Science</h5>
+        <p><strong>Global Warming Models:</strong> Climate scientists integrate temperature changes over time and geography to predict future conditions.</p>
+        <p><strong>Carbon Footprint:</strong> Total emissions calculated by integrating emission rates across activities and time.</p>
+        </div>
+        
+        <div style='background: #e0f2f1; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #009688; margin-top: 1rem;'>
+        <h5>🎮 Video Games & Animation</h5>
+        <p><strong>Physics Engines:</strong> Game physics use FTC to calculate realistic motion - integrate acceleration to get velocity, integrate velocity to get position.</p>
+        <p><strong>3D Animation:</strong> Smooth character movement by integrating motion paths and deformation rates.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 10px; color: white; margin: 1rem 0;'>
+    <h5>🎯 Why FTC Changed Everything</h5>
+    <p><strong>Before FTC:</strong> Mathematics was largely geometric and arithmetic</p>
+    <p><strong>After FTC:</strong> Mathematics became the language of change and motion</p>
+    
+    <p><strong>This enabled:</strong></p>
+    <ul>
+    <li>🏭 <strong>Industrial Revolution:</strong> Steam engines, manufacturing optimization</li>
+    <li>⚡ <strong>Electrical Age:</strong> Circuit analysis, electromagnetic theory</li>
+    <li>✈️ <strong>Modern Transportation:</strong> Aerodynamics, automotive engineering</li>
+    <li>💻 <strong>Digital Age:</strong> Signal processing, computer graphics, AI</li>
+    <li>🌌 <strong>Space Age:</strong> Orbital mechanics, rocket science</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Modern perspective
+    st.markdown("""
+    <div class='concept-card'>
+    <h4>🔬 Modern Perspective: Why Students Should Care</h4>
+    
+    <h5>📱 Technology You Use Daily:</h5>
+    <ul>
+    <li><strong>GPS Navigation:</strong> Your phone integrates velocity data to track your location</li>
+    <li><strong>Streaming Video:</strong> Compression algorithms use calculus to optimize file sizes</li>
+    <li><strong>Battery Management:</strong> Your phone predicts battery life by integrating power consumption</li>
+    <li><strong>Camera Autofocus:</strong> Calculus optimizes lens position for sharpest image</li>
+    </ul>
+    
+    <h5>🎯 Career Applications:</h5>
+    <ul>
+    <li><strong>Data Science:</strong> Machine learning algorithms optimize by finding where derivatives equal zero</li>
+    <li><strong>Engineering:</strong> Every engineering field uses calculus for design and analysis</li>
+    <li><strong>Business:</strong> Optimization problems in logistics, marketing, and finance</li>
+    <li><strong>Medicine:</strong> Medical imaging, drug development, and biomechanics</li>
+    </ul>
+    
+    <p><strong>Bottom Line:</strong> The FTC isn't just math history - it's the foundation of the modern technological world!</p>
+    </div>
+    """, unsafe_allow_html=True)
             
         except:
             st.error("Unable to plot function with current parameters. Try different values!")
@@ -815,6 +1029,45 @@ elif section == "📐 MVT Explorer":
     </ul>
     </div>
     """, unsafe_allow_html=True)
+    
+    # Real-world applications of MVT
+    st.markdown("""
+    <div class='interactive-section'>
+    <h4>🌍 Real-World Applications of Mean Value Theorem</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    mvt_col1, mvt_col2 = st.columns(2)
+    
+    with mvt_col1:
+        st.markdown("""
+        <div style='background: #e3f2fd; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #2196f3;'>
+        <h5>🚓 Traffic Law Enforcement</h5>
+        <p><strong>Speed Cameras:</strong> If cameras 10 miles apart record your car passing at specific times, police can prove you exceeded the speed limit somewhere between them using MVT!</p>
+        <p><strong>Example:</strong> Pass camera A at 2:00 PM, camera B at 2:06 PM → Average speed = 100 mph → You definitely hit 100 mph at some point!</p>
+        </div>
+        
+        <div style='background: #f3e5f5; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #9c27b0; margin-top: 1rem;'>
+        <h5>🏭 Manufacturing Quality Control</h5>
+        <p><strong>Temperature Monitoring:</strong> If a product's temperature changes from 70°F to 150°F over 10 minutes, MVT guarantees it hit every temperature in between at some point.</p>
+        <p><strong>Production Rates:</strong> Ensuring consistent manufacturing output by analyzing rate changes.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with mvt_col2:
+        st.markdown("""
+        <div style='background: #e8f5e8; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #4caf50;'>
+        <h5>🎯 Sports & Athletics</h5>
+        <p><strong>Running Analysis:</strong> If a marathon runner's average pace is 7 min/mile, MVT guarantees they ran exactly that pace at some point during the race.</p>
+        <p><strong>Baseball:</strong> A ball's velocity changes from 95 mph to 0 mph when caught → It had every intermediate velocity at some instant.</p>
+        </div>
+        
+        <div style='background: #fff3e0; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #ff9800; margin-top: 1rem;'>
+        <h5>💊 Medical Diagnostics</h5>
+        <p><strong>Blood Pressure:</strong> If systolic pressure changes from 120 to 140 mmHg during stress, it passed through every value in between.</p>
+        <p><strong>Drug Metabolism:</strong> Ensuring drug concentration levels behave predictably in the bloodstream.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 elif section == "🎮 Quiz Mode":
     st.header("🎮 Interactive Quiz Mode")
@@ -1047,6 +1300,94 @@ with st.expander("📐 Asymptote Finder"):
 with st.expander("🎯 Interactive Riemann Sums"):
     st.subheader("Visualize Integration as Area Under Curve")
     
+    # Theoretical Background Section
+    st.markdown("""
+    <div class='concept-card'>
+    <h4>📚 What are Riemann Sums?</h4>
+    <p><strong>Riemann sums</strong> are a method for approximating the area under a curve by dividing it into rectangles. 
+    They form the foundation of integral calculus and provide the rigorous definition of the definite integral.</p>
+    
+    <h5>🏗️ The Construction Process:</h5>
+    <ol>
+    <li><strong>Partition:</strong> Divide interval [a,b] into n subintervals of width Δx = (b-a)/n</li>
+    <li><strong>Choose points:</strong> Select a point in each subinterval to determine rectangle height</li>
+    <li><strong>Calculate areas:</strong> Sum up all rectangle areas: Σ f(xᵢ) · Δx</li>
+    <li><strong>Take the limit:</strong> As n → ∞, the sum approaches the exact integral</li>
+    </ol>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class='formula-box'>
+    <h4>📐 Mathematical Definition</h4>
+    <p>For a function f(x) on interval [a,b], the definite integral is defined as:</p>
+    <p style='text-align: center; font-size: 1.2em;'>
+    <strong>∫ₐᵇ f(x) dx = lim(n→∞) Σᵢ₌₁ⁿ f(xᵢ) · Δx</strong>
+    </p>
+    <p>where Δx = (b-a)/n and xᵢ is a point in the i-th subinterval.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Method comparison
+    col_theory1, col_theory2, col_theory3 = st.columns(3)
+    
+    with col_theory1:
+        st.markdown("""
+        <div style='background: #e3f2fd; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196f3;'>
+        <h5>📍 Left Riemann Sum</h5>
+        <p><strong>xᵢ = a + (i-1)·Δx</strong></p>
+        <p>Uses left endpoint of each subinterval</p>
+        <p><em>Underestimates</em> if function is increasing</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_theory2:
+        st.markdown("""
+        <div style='background: #f3e5f5; padding: 1rem; border-radius: 8px; border-left: 4px solid #9c27b0;'>
+        <h5>📍 Right Riemann Sum</h5>
+        <p><strong>xᵢ = a + i·Δx</strong></p>
+        <p>Uses right endpoint of each subinterval</p>
+        <p><em>Overestimates</em> if function is increasing</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_theory3:
+        st.markdown("""
+        <div style='background: #e8f5e8; padding: 1rem; border-radius: 8px; border-left: 4px solid #4caf50;'>
+        <h5>📍 Midpoint Rule</h5>
+        <p><strong>xᵢ = a + (i-0.5)·Δx</strong></p>
+        <p>Uses midpoint of each subinterval</p>
+        <p><em>Generally more accurate</em> than left/right</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class='concept-card'>
+    <h4>🎯 Key Insights About Riemann Sums</h4>
+    
+    <h5>📈 Convergence Properties:</h5>
+    <ul>
+    <li><strong>More rectangles = Better approximation:</strong> As n increases, the approximation improves</li>
+    <li><strong>All methods converge:</strong> Left, right, and midpoint all approach the same limit</li>
+    <li><strong>Rate of convergence:</strong> Midpoint rule typically converges faster than left/right</li>
+    </ul>
+    
+    <h5>🔍 Error Analysis:</h5>
+    <ul>
+    <li><strong>Error ∝ 1/n:</strong> Doubling rectangles roughly halves the error</li>
+    <li><strong>Function behavior matters:</strong> Smooth functions have smaller errors</li>
+    <li><strong>Interval size matters:</strong> Larger intervals generally have larger errors</li>
+    </ul>
+    
+    <h5>🌉 Connection to FTC:</h5>
+    <p>Riemann sums provide the <em>definition</em> of the definite integral, while the Fundamental Theorem 
+    of Calculus gives us an <em>efficient method</em> to evaluate it using antiderivatives!</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.markdown("### 🎮 Interactive Exploration")
+    
     col1, col2 = st.columns(2)
     
     with col1:
@@ -1132,8 +1473,129 @@ with st.expander("🎯 Interactive Riemann Sums"):
                 st.plotly_chart(fig, use_container_width=True)
                 st.info(f"🧮 Riemann Sum Approximation: {riemann_sum:.6f}")
                 
+                # Add theoretical analysis
+                st.markdown(f"""
+                <div class='concept-card'>
+                <h4>📊 Analysis of Current Approximation</h4>
+                <p><strong>Function:</strong> f(x) = {riemann_func}</p>
+                <p><strong>Interval:</strong> [{a_bound:.2f}, {b_bound:.2f}]</p>
+                <p><strong>Method:</strong> {method} Riemann Sum</p>
+                <p><strong>Number of rectangles:</strong> {n_rectangles}</p>
+                <p><strong>Width of each rectangle (Δx):</strong> {dx:.4f}</p>
+                <p><strong>Approximation:</strong> {riemann_sum:.6f}</p>
+                
+                <h5>🎯 Improvement Suggestions:</h5>
+                <ul>
+                <li>Try increasing the number of rectangles to see convergence</li>
+                <li>Compare different methods (Left vs Right vs Midpoint)</li>
+                <li>Notice how the approximation changes with function curvature</li>
+                </ul>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # Calculate exact integral for comparison (where possible)
+                try:
+                    if riemann_func == "x**2":
+                        exact_integral = (b_bound**3 - a_bound**3) / 3
+                        error = abs(riemann_sum - exact_integral)
+                        st.success(f"🎯 Exact integral: {exact_integral:.6f} | Error: {error:.6f} ({100*error/abs(exact_integral):.2f}%)")
+                    elif riemann_func == "sin(x)":
+                        exact_integral = -np.cos(b_bound) + np.cos(a_bound)
+                        error = abs(riemann_sum - exact_integral)
+                        st.success(f"🎯 Exact integral: {exact_integral:.6f} | Error: {error:.6f} ({100*error/abs(exact_integral):.2f}%)")
+                except:
+                    pass
+                
             except Exception as e:
                 st.error(f"Error creating visualization: {str(e)}")
+    
+    # Historical context
+    st.markdown("""
+    <div class='concept-card'>
+    <h4>🏛️ Historical Context</h4>
+    <p><strong>Bernhard Riemann (1826-1866)</strong> was a German mathematician who formalized the concept 
+    of integration through his definition of Riemann sums. His work provided the rigorous foundation 
+    for integral calculus that we use today.</p>
+    
+    <h5>📜 Before Riemann:</h5>
+    <ul>
+    <li>Ancient Greeks used "method of exhaustion" for areas</li>
+    <li>Newton and Leibniz developed calculus but lacked rigorous definitions</li>
+    <li>Cauchy began formalizing limits and continuity</li>
+    </ul>
+    
+    <h5>🎓 Riemann's Contribution:</h5>
+    <ul>
+    <li>Precise definition of the definite integral</li>
+    <li>Conditions for integrability (Riemann integrable functions)</li>
+    <li>Foundation for modern real analysis</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Real-world applications
+    st.markdown("""
+    <div class='interactive-section'>
+    <h4>🌍 Real-World Applications of Riemann Sums</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    app_col1, app_col2 = st.columns(2)
+    
+    with app_col1:
+        st.markdown("""
+        <div style='background: #e8f5e8; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #4caf50;'>
+        <h5>✈️ Aerospace Engineering</h5>
+        <p><strong>Wing Design:</strong> Engineers use Riemann sums to calculate the total lift generated by airplane wings by integrating pressure distributions over the wing surface.</p>
+        <p><strong>Fuel Consumption:</strong> Airlines calculate total fuel usage by integrating fuel flow rate over time during flight.</p>
+        </div>
+        
+        <div style='background: #fff3e0; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #ff9800; margin-top: 1rem;'>
+        <h5>🏗️ Civil Engineering</h5>
+        <p><strong>Bridge Load Analysis:</strong> Calculating total stress on bridges by integrating distributed loads (traffic, wind, weight) across the span.</p>
+        <p><strong>Water Flow:</strong> Determining total water volume in irregularly shaped reservoirs or river channels.</p>
+        </div>
+        
+        <div style='background: #f3e5f5; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #9c27b0; margin-top: 1rem;'>
+        <h5>💊 Medical Applications</h5>
+        <p><strong>Drug Dosage:</strong> Calculating total drug absorption in the body by integrating concentration over time.</p>
+        <p><strong>Cardiac Output:</strong> Measuring heart function by integrating blood flow velocity over cross-sectional area.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with app_col2:
+        st.markdown("""
+        <div style='background: #e3f2fd; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #2196f3;'>
+        <h5>🚗 Automotive Industry</h5>
+        <p><strong>Distance Calculation:</strong> Your car's odometer uses integration - it continuously adds up tiny distance increments (speed × time) to show total distance traveled.</p>
+        <p><strong>Fuel Efficiency:</strong> EPA ratings are calculated by integrating instantaneous fuel consumption over standardized driving cycles.</p>
+        </div>
+        
+        <div style='background: #ffebee; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #f44336; margin-top: 1rem;'>
+        <h5>📊 Economics & Finance</h5>
+        <p><strong>Consumer Surplus:</strong> Economists integrate demand curves to calculate economic welfare and market efficiency.</p>
+        <p><strong>Present Value:</strong> Financial analysts integrate cash flows over time to determine investment values.</p>
+        </div>
+        
+        <div style='background: #e0f2f1; padding: 1.5rem; border-radius: 10px; border-left: 5px solid #009688; margin-top: 1rem;'>
+        <h5>🌿 Environmental Science</h5>
+        <p><strong>Pollution Levels:</strong> Calculating total emissions by integrating pollutant concentrations over time and area.</p>
+        <p><strong>Population Growth:</strong> Predicting animal population changes by integrating growth rates over time.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 10px; color: white; margin: 1rem 0;'>
+    <h5>🎯 Why This Matters to Students</h5>
+    <p><strong>Every time you:</strong></p>
+    <ul>
+    <li>🚗 Check your car's trip odometer → You're seeing Riemann sums in action!</li>
+    <li>💳 Calculate compound interest → You're using continuous integration</li>
+    <li>🏃‍♂️ Use a fitness tracker for calories burned → Integration of metabolic rate over time</li>
+    <li>🌡️ See weather "accumulation" reports → Integration of precipitation rate</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
 # --- FOOTER ---
 st.markdown("---")
